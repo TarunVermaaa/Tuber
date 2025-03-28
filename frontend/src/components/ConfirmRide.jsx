@@ -1,6 +1,15 @@
 import React from "react";
 
-const ConfirmRide = ({ setConfirmRidePanel, setVehicleFound, setVehiclePanelOpen  }) => {
+const ConfirmRide = ({
+  setConfirmRidePanel,
+  setVehicleFound,
+  setVehiclePanelOpen,
+  createRide,
+  pickup,
+  destination,
+  fare,
+  vehicleType,
+}) => {
   return (
     <div>
       <h5 className="p-3 text-center absolute top-4 right-[10%]">
@@ -26,7 +35,7 @@ const ConfirmRide = ({ setConfirmRidePanel, setVehicleFound, setVehiclePanelOpen
           <div>
             <h3 className="text-lg font-medium">5/9</h3>
             <p className="text-gray-600 text-sm -mt-1">
-              Devilal Colony, Gurgaon
+              {pickup}
             </p>
           </div>
         </div>
@@ -36,7 +45,7 @@ const ConfirmRide = ({ setConfirmRidePanel, setVehicleFound, setVehiclePanelOpen
           <div>
             <h3 className="text-lg font-medium">5/9</h3>
             <p className="text-gray-600 text-sm -mt-1">
-              Devilal Colony, Gurgaon
+             {destination}
             </p>
           </div>
         </div>
@@ -44,7 +53,7 @@ const ConfirmRide = ({ setConfirmRidePanel, setVehicleFound, setVehiclePanelOpen
         <div className="flex items-center  gap-5 p-3 ">
           <i className="ri-currency-line text-lg"></i>
           <div>
-            <h3 className="text-lg font-medium">&#8377;193</h3>
+            <h3 className="text-lg font-medium">&#8377;{fare[vehicleType]}</h3>
             <p className="text-gray-600 text-sm -mt-1">Cash </p>
           </div>
         </div>
@@ -55,6 +64,7 @@ const ConfirmRide = ({ setConfirmRidePanel, setVehicleFound, setVehiclePanelOpen
           setVehicleFound(true);
           setConfirmRidePanel(false);
           setVehiclePanelOpen(false);
+          createRide();
         }}
         className="w-full bg-green-600 text-white font-semibold p-2 rounded-lg mt-5"
       >

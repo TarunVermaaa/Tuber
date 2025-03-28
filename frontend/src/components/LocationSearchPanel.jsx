@@ -1,32 +1,44 @@
 import React from "react";
 
-const LocationSearchPanel = ({ setPanelOpen, setVehiclePanelOpen }) => {
-  const locations = [
-    "24B, Near Apollo Hospital, Gurgaon, Haryana",
-    "33B, Near Fortis Hospital, Gurgaon, Haryana",
-    "94B, Near Aryan Hospital, Gurgaon, Haryana",
-    "2B, Near Medanta Hospital, Gurgaon, Haryana",
-  ];
+const LocationSearchPanel = ({
+  suggestions,
+  setVehiclePanel,
+  setPanelOpen,
+  setPickup,
+  setDestination,
+  activeField,
+}) => {
+  const handleSuggestionClick = (suggestion) => {
+    if (activeField === "pickup") {
+      setPickup(suggestion);
+    } else if (activeField === "destination") {
+      setDestination(suggestion);
+    }
+    // setVehiclePanel(true)
+    // setPanelOpen(false)
+  };
 
   return (
     <div>
-      {locations.map(function (location , index) {
-        return (
-          <div
-          key={index}
-            onClick={() => {
-              setPanelOpen(false);
-              setVehiclePanelOpen(true);
-            }}
-            className="flex gap-4 border-2 p-3 border-gray-50 active:border-black rounded-xl  justify-start items-center my-2"
-          >
-            <h2 className="bg-[#eee] flex items-center justify-center h-10 w-12 rounded-full">
-              <i className="ri-map-pin-fill"></i>
-            </h2>
-            <h4 className="font-medium">{location}</h4>
-          </div>
-        );
-      })}
+      {/* Display fetched suggestions */}
+      {suggestions.map((elem, idx) => (
+        <div
+          key={idx}
+          onClick={() =>
+            handleSuggestionClick(
+              elem.structured_formatting?.main_text || elem.description
+            )
+          }
+          className="flex gap-4 border-2 p-3 border-gray-50 active:border-black rounded-xl items-center my-2 justify-start"
+        >
+          <h2 className="bg-[#eee] h-8 flex items-center justify-center w-12 rounded-full">
+            <i className="ri-map-pin-fill"></i>
+          </h2>
+          <h4 className="font-medium">
+            {elem.structured_formatting?.main_text || elem.description}
+          </h4>
+        </div>
+      ))}
     </div>
   );
 };

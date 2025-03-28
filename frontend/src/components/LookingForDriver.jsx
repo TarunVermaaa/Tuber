@@ -1,12 +1,12 @@
 import React from "react";
 
-const LookingForDriver = ({ setVehicleFound }) => {
+const LookingForDriver = (props) => {
   return (
     <div>
       <h5
         className="p-3 text-center absolute top-4 right-[10%] cursor-pointer"
         onClick={() => {
-          setVehicleFound(false);
+          props.setVehicleFound(false);
         }} 
       >
         <i className="text-2xl text-gray-400  ri-arrow-down-wide-line"></i>
@@ -26,7 +26,7 @@ const LookingForDriver = ({ setVehicleFound }) => {
           <div>
             <h3 className="text-lg font-medium">5/9</h3>
             <p className="text-gray-600 text-sm -mt-1">
-              Devilal Colony, Gurgaon
+              {props.pickup}
             </p>
           </div>
         </div>
@@ -36,7 +36,7 @@ const LookingForDriver = ({ setVehicleFound }) => {
           <div>
             <h3 className="text-lg font-medium">5/9</h3>
             <p className="text-gray-600 text-sm -mt-1">
-              Devilal Colony, Gurgaon
+              {props.destination}
             </p>
           </div>
         </div>
@@ -44,7 +44,7 @@ const LookingForDriver = ({ setVehicleFound }) => {
         <div className="flex items-center  gap-5 p-3 ">
           <i className="ri-currency-line text-lg"></i>
           <div>
-            <h3 className="text-lg font-medium">&#8377;193</h3>
+            <h3 className="text-lg font-medium">&#8377;{props.fare[props.vehicleType]}</h3>
             <p className="text-gray-600 text-sm -mt-1">Cash </p>
           </div>
         </div>
