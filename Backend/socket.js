@@ -18,13 +18,37 @@ function initializeSocket(server) {
     socket.on("join", async (data) => {
       const { userId, userType } = data;
 
-      console.log(`User ID: ${userId}, User Type: ${userType} connected to the server. Socket ID: ${socket.id} `);
+      console.log(
+        `User ID: ${userId}, User Type: ${userType} connected to the server. Socket ID: ${socket.id} `
+      );
 
       if (userType === "user") {
         await userModel.findByIdAndUpdate(userId, { socketId: socket.id });
       } else if (userType === "captain") {
         await captainModel.findByIdAndUpdate(userId, { socketId: socket.id });
       }
+    });
+
+    socket.on("update-location-captain", async (data) => {
+      const { userId, location } = data;
+
+      if (
+        !location ||
+        typeof location.ltd !== "number" ||
+        typeof location.lng !== "number"
+      ) {
+        console.error("Invalid location data received:", location);
+        return socket.emit("error", {
+          message: "Invalid location data received.",
+        });
+      }
+
+      await captainModel.findByIdAndUpdate(userId, {
+        location: {
+          ltd: location.ltd,
+          lng: location.lng,
+        },
+      });
     });
 
     // Handle disconnection
