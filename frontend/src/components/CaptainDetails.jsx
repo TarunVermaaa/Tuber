@@ -1,11 +1,14 @@
-import React from "react";
-import { useContext } from "react";
-
+import React, { useContext } from "react";
 import { CaptainDataContext } from "../context/CaptainContext";
 
 const CaptainDetails = () => {
-
   const { captain } = useContext(CaptainDataContext);
+
+  
+  // 🚀 Fix 4: Avoid accessing `null` captain
+  if (!captain) {
+    return <h4>Loading Captain Details...</h4>;
+  }
 
   return (
     <div>
@@ -14,13 +17,15 @@ const CaptainDetails = () => {
           <img
             src="https://www.shutterstock.com/image-photo/handsome-indonesian-southeast-asian-man-260nw-2476654675.jpg"
             className="h-10 w-10 rounded-full object-cover"
-            alt=""
+            alt="Captain"
           />
-          <h4 className="text-lg font-medium">{captain.fullname.firstname + " " + captain.fullname.lastname}</h4>
+          <h4 className="text-lg font-medium">
+            {captain.fullname.firstname + " " + captain.fullname.lastname}
+          </h4>
         </div>
         <div>
           <h4 className="text-xl font-semibold">&#8377;122.3</h4>
-          <p className="text-sm  text-gray-600">Earned</p>
+          <p className="text-sm text-gray-600">Earned</p>
         </div>
       </div>
       <div className="flex p-3 mt-6 bg-gray-100 rounded-xl justify-center gap-5 items-start">
