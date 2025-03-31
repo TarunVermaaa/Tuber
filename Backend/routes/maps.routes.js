@@ -21,9 +21,9 @@ router.get(
   getDistanceTime
 );
 
-router.get(
+router.get( 
   "/get-suggestions",
-  query("input").isString().isLength({ min: 3 }),
+  query("input").isString(),
   authMiddleware.authUser,  
   getAutoCompleteSuggestions
 );

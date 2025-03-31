@@ -1,6 +1,6 @@
 import React from "react";
 
-const RidePopUp = ({ setRidePopUpPanel, setConfirmRidePopUpPanel }) => {
+const RidePopUp = ({ setRidePopUpPanel, setConfirmRidePopUpPanel, ride , confirmRide }) => {
   return (
     <div>
       <h5 className="p-3 text-center absolute top-4 right-[10%]">
@@ -21,7 +21,10 @@ const RidePopUp = ({ setRidePopUpPanel, setConfirmRidePopUpPanel }) => {
             alt=""
           />
 
-          <h2 className="text-lg font-medium">Sonam Angry</h2>
+          <h2 className="text-lg font-medium">
+            {ride?.user.fullName.firstname +
+              (ride?.user.fullName.lastname ? " " + ride?.user.fullName.lastname:"")}
+          </h2>
         </div>
 
         <h5 className="text-lg font-semibold ">2.2 KM</h5>
@@ -32,9 +35,7 @@ const RidePopUp = ({ setRidePopUpPanel, setConfirmRidePopUpPanel }) => {
           <i className="ri-map-pin-2-fill text-lg"></i>
           <div>
             <h3 className="text-lg font-medium">5/9</h3>
-            <p className="text-gray-600 text-sm -mt-1">
-              Devilal Colony, Gurgaon
-            </p>
+            <p className="text-gray-600 text-sm -mt-1">{ride?.pickup}</p>
           </div>
         </div>
 
@@ -42,16 +43,14 @@ const RidePopUp = ({ setRidePopUpPanel, setConfirmRidePopUpPanel }) => {
           <i className="ri-map-pin-2-fill text-lg"></i>
           <div>
             <h3 className="text-lg font-medium">5/9</h3>
-            <p className="text-gray-600 text-sm -mt-1">
-              Devilal Colony, Gurgaon
-            </p>
+            <p className="text-gray-600 text-sm -mt-1">{ride?.destination}</p>
           </div>
         </div>
 
         <div className="flex items-center  gap-5 p-3 ">
           <i className="ri-currency-line text-lg"></i>
           <div>
-            <h3 className="text-lg font-medium">&#8377;193</h3>
+            <h3 className="text-lg font-medium">&#8377;{ride?.fare}</h3>
             <p className="text-gray-600 text-sm -mt-1">Cash </p>
           </div>
         </div>
@@ -61,7 +60,8 @@ const RidePopUp = ({ setRidePopUpPanel, setConfirmRidePopUpPanel }) => {
         <button
           onClick={() => {
             setConfirmRidePopUpPanel(true);
-            setRidePopUpPanel(false);
+            confirmRide()
+
           }}
           className=" bg-green-600 text-white font-semibold p-3 px-8 rounded-lg "
         >

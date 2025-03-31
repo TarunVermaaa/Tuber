@@ -8,7 +8,7 @@ import VehiclePanel from "../components/VehiclePanel";
 import ConfirmRide from "../components/ConfirmRide";
 import WaitingForDriver from "../components/WaitingForDriver";
 import LookingForDriver from "../components/LookingForDriver";
-import { SocketContext } from "../context/SocketContext";
+import { SocketContext , socket } from "../context/SocketContext";
 import { UserDataContext } from "../context/userContext";
 
 const Home = () => {
@@ -47,6 +47,11 @@ const Home = () => {
     sendMessage("join", { userType: "user", userId: user._id });
   }, [user]);
 
+  socket.on('ride-confirmed' , ride  => {
+    setWaitingForDriver(true)
+  })
+
+
   const handlePickupChange = async (e) => {
     setPickup(e.target.value);
     const token = localStorage.getItem("token");
@@ -63,7 +68,11 @@ const Home = () => {
         }
       );
       setPickupSuggestions(response.data);
-    } catch {
+    } catch(err) {
+      if (err) {
+        console.log("Error in fetching pickup suggestions: ", err);
+        // Handle error in fetching pickup suggestions
+      }
       // handle error
     }
   };

@@ -65,7 +65,6 @@ module.exports.createRide = async ({
   pickup,
   destination,
   vehicleType,
-  
 }) => {
   if (!user || !pickup || !destination || !vehicleType) {
     throw new Error("All fields are required");
@@ -79,5 +78,34 @@ module.exports.createRide = async ({
     otp: getOtp(4),
     fare: fare[vehicleType],
   });
+  return ride;
+};
+
+module.exports.confirmRide = async ({ rideId }) => {
+  if (!rideId) {
+    throw new Error("Ride ID is required");
+  }
+
+  await rideModel.findOneAndUpdate(
+    {
+      _id: rideId,
+    },
+    {
+      status: "accepted",
+      captain: captain._id,
+    }
+  );
+
+  const ride = await rideModel
+    .findOne({
+      _id: rideId,
+    })
+    .populate("user");
+
+  if (!ride) {
+    throw new Error("Ride not found");
+  }
+
+  
   return ride;
 };
