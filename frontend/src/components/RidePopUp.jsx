@@ -1,6 +1,6 @@
 import React from "react";
 
-const RidePopUp = ({ setRidePopUpPanel, setConfirmRidePopUpPanel, ride , confirmRide }) => {
+const RidePopUp = ({ setRidePopUpPanel, setConfirmRidePopupPanel, ride , confirmRide }) => {
   return (
     <div>
       <h5 className="p-3 text-center absolute top-4 right-[10%]">
@@ -59,7 +59,7 @@ const RidePopUp = ({ setRidePopUpPanel, setConfirmRidePopUpPanel, ride , confirm
       <div className="flex items-center mt-5 justify-between w-full">
         <button
           onClick={() => {
-            setConfirmRidePopUpPanel(true);
+            setConfirmRidePopupPanel(true);
             confirmRide()
 
           }}

@@ -22,15 +22,11 @@ const CaptainHome = () => {
     const { socket } = useContext(SocketContext)
     const { captain } = useContext(CaptainDataContext)
 
-
-
     useEffect(() => {
         socket.emit('join', {
-          userId: captain._id,
-          userType: 'captain'
+            userId: captain._id,
+            userType: 'captain'
         })
-
-
         const updateLocation = () => {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(position => {

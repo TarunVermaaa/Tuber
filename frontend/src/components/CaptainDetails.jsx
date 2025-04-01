@@ -1,34 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { CaptainDataContext } from "../context/CaptainContext";
 
 const CaptainDetails = () => {
   const { captain } = useContext(CaptainDataContext);
 
+  console.log("🚀 Captain Details Rendered:", captain); // Debug Log #1
   
-  // 🚀 Fix 4: Avoid accessing `null` captain
-  if (!captain) {
+  useEffect(() => {
+    console.log("🟢 Captain Updated:", captain); // Debug Log #2 (Whenever captain updates)
+  }, [captain]);
+
+  if (!captain || !captain.fullname) {
+    console.warn("⚠️ Captain Data is Missing or Undefined!");
     return <h4>Loading Captain Details...</h4>;
   }
 
   return (
     <div>
       <div className="flex items-center justify-between">
-        <div className="flex items-center justify-start gap-4">
+        <div className="flex items-center justify-start gap-3">
           <img
-            src="https://www.shutterstock.com/image-photo/handsome-indonesian-southeast-asian-man-260nw-2476654675.jpg"
             className="h-10 w-10 rounded-full object-cover"
-            alt="Captain"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdlMd7stpWUCmjpfRjUsQ72xSWikidbgaI1w&s"
+            alt=""
           />
-          <h4 className="text-lg font-medium">
+          <h4 className="text-lg font-medium capitalize">
             {captain.fullname.firstname + " " + captain.fullname.lastname}
           </h4>
         </div>
         <div>
-          <h4 className="text-xl font-semibold">&#8377;122.3</h4>
+          <h4 className="text-xl font-semibold">₹295.20</h4>
           <p className="text-sm text-gray-600">Earned</p>
         </div>
       </div>
-      <div className="flex p-3 mt-6 bg-gray-100 rounded-xl justify-center gap-5 items-start">
+      <div className="flex p-3 mt-8 bg-gray-100 rounded-xl justify-center gap-5 items-start">
         <div className="text-center">
           <i className="text-3xl mb-2 font-thin ri-timer-2-line"></i>
           <h5 className="text-lg font-medium">10.2</h5>
