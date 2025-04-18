@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { CaptainDataContext } from '../context/CapatainContext'
+import GlideLogo from '../assets/GlideLogo.png'
 
 const Captainlogin = () => {
 
@@ -38,7 +39,7 @@ const Captainlogin = () => {
   return (
     <div className='p-7 h-screen flex flex-col justify-between'>
       <div>
-        <img className='w-20 mb-3' src="https://www.svgrepo.com/show/505031/uber-driver.svg" alt="" />
+        <img className='w-32 h-32 -ml-8 -mt-2 mb-3' src={GlideLogo} alt="" />
 
         <form onSubmit={(e) => {
           submitHandler(e)

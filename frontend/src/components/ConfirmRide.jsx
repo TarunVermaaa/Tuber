@@ -31,7 +31,7 @@ const ConfirmRide = (props) => {
                 <img
                     className="h-20"
                     src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png"
-                    alt="Car Uber"
+                    alt="Car Glide"
                 />
             </div>
 
